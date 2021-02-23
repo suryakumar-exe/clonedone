@@ -23,7 +23,7 @@ class AddStudentForm(forms.Form):
             single_course = (course.id, course.course_name)
             course_list.append(single_course)
     except:
-        course_list = []
+        course_list = ['NONE']
     
     #For Displaying Session Years
     try:
@@ -34,7 +34,7 @@ class AddStudentForm(forms.Form):
             session_year_list.append(single_session_year)
             
     except:
-        session_year_list = []
+        session_year_list = ['NONE']
     
     gender_list = (
         ('Male','Male'),
