@@ -5,7 +5,7 @@ from django.core.files.storage import FileSystemStorage #To upload Profile Pictu
 from django.urls import reverse
 import datetime # To Parse input DateTime into Python Date Time Object
 
-from student_management_app.models import CustomUser, Staffs, Courses, Subjects, Students, Attendance, AttendanceReport, LeaveReportStudent, FeedBackStudent, StudentResult
+from student_management_app.models import CustomUser, Staffs, Courses, Subjects, Students, Attendance, AttendanceReport, LeaveReportStudent, FeedBackStudent, StudentResult,StudentFees
 
 
 def student_home(request):
@@ -193,6 +193,14 @@ def student_view_result(request):
         "student_result": student_result,
     }
     return render(request, "student_template/student_view_result.html", context)
+
+def student_view_fees(request):
+    student = Students.objects.get(admin=request.user.id)
+    student_fees = StudentFees.objects.filter(student_id=student.id)
+    context = {
+        "student_fees": student_fees,
+    }
+    return render(request, "student_template/student_view_fees.html", context)
 
 
 
