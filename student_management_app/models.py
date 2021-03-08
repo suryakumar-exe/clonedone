@@ -167,6 +167,17 @@ class StudentResult(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects = models.Manager()
 
+	
+class StudentFees(models.Model):
+    id = models.AutoField(primary_key=True)
+    student_id = models.ForeignKey(Students, on_delete=models.CASCADE)
+    subject_id = models.ForeignKey(Subjects, on_delete=models.CASCADE)
+    subject_due_fees = models.FloatField(default=0)
+    subject_total_fees = models.FloatField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    objects = models.Manager()
+
 
 #Creating Django Signals
 
