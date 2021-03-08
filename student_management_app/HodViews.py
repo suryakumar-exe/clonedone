@@ -344,6 +344,7 @@ def add_student_save(request):
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             address = form.cleaned_data['address']
+            number = form.cleaned_data['number']
             session_year_id = form.cleaned_data['session_year_id']
             course_id = form.cleaned_data['course_id']
             gender = form.cleaned_data['gender']
@@ -363,6 +364,7 @@ def add_student_save(request):
             try:
                 user = CustomUser.objects.create_user(username=username, password=password, email=email, first_name=first_name, last_name=last_name, user_type=3)
                 user.students.address = address
+                user.students.number = number
 
                 course_obj = Courses.objects.get(id=course_id)
                 user.students.course_id = course_obj
@@ -402,6 +404,7 @@ def edit_student(request, student_id):
     form.fields['first_name'].initial = student.admin.first_name
     form.fields['last_name'].initial = student.admin.last_name
     form.fields['address'].initial = student.address
+    form.fields['number'].initial = student.number
     form.fields['course_id'].initial = student.course_id.id
     form.fields['gender'].initial = student.gender
     form.fields['session_year_id'].initial = student.session_year_id.id
@@ -429,6 +432,7 @@ def edit_student_save(request):
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
             address = form.cleaned_data['address']
+            number = form.cleaned_data['number']
             course_id = form.cleaned_data['course_id']
             gender = form.cleaned_data['gender']
             session_year_id = form.cleaned_data['session_year_id']
@@ -456,6 +460,7 @@ def edit_student_save(request):
                 # Then Update Students Table
                 student_model = Students.objects.get(admin=student_id)
                 student_model.address = address
+                student_model.number = number
 
                 course = Courses.objects.get(id=course_id)
                 student_model.course_id = course
