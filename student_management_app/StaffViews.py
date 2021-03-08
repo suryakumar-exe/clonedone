@@ -8,7 +8,7 @@ from django.core import serializers
 import json
 
 
-from student_management_app.models import CustomUser, Staffs, Courses, Subjects, Students, SessionYearModel, Attendance, AttendanceReport, LeaveReportStaff, FeedBackStaffs, StudentResult
+from student_management_app.models import CustomUser, Staffs, Courses, Subjects, Students, SessionYearModel, Attendance, AttendanceReport, LeaveReportStaff, FeedBackStaffs, StudentResult,StudentFees
 
 
 def staff_home(request):
@@ -309,6 +309,50 @@ def staff_profile_update(request):
         except:
             messages.error(request, "Failed to Update Profile")
             return redirect('staff_profile')
+
+def staff_add_fees(request):
+    subjects = Subjects.objects.filter(staff_id=request.user.id)
+    session_years = SessionYearModel.objects.all()
+    context = {
+        "subjects": subjects,
+        "session_years": session_years,
+    }
+    return render(request, "staff_template/add_fees_template.html", context)
+
+
+def staff_add_fees_save(request):
+    if request.method != "POST":
+        messages.error(request, "Invalid Method")
+        return redirect('staff_add_fees')
+    else:
+        student_admin_id = request.POST.get('student_list')
+        total_fees = request.POST.get('total_fees')
+        due_fees = request.POST.get('due_fees')
+        subject_id = request.POST.get('subject')
+
+        student_obj = Students.objects.get(admin=student_admin_id)
+        subject_obj = Subjects.objects.get(id=subject_id)
+
+        try:
+            # Check if Students Result Already Exists or not
+            check_exist = StudentFees.objects.filter(subject_id=subject_obj, student_id=student_obj).exists()
+            if check_exist:
+                result = StudentFees.objects.get(subject_id=subject_obj, student_id=student_obj)
+                result.subject_total_fees = total_fees
+                result.subject_due_fees = due_fees
+                result.save()
+                messages.success(request, "Fees Updated Successfully!")
+                return redirect('staff_add_fees')
+            else:
+                result = StudentFees(student_id=student_obj, subject_id=subject_obj, subject_due_fees=due_fees,
+                                     subject_total_fees=total_fees)
+                result.save()
+                messages.success(request, "Fees Added Successfully!")
+                return redirect('staff_add_fees')
+        except:
+            messages.error(request, "Failed to Add Fees!")
+            return redirect('staff_add_fees')
+
 
 
 
