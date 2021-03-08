@@ -69,6 +69,17 @@
                 </p>
               </a>
             </li>
+                
+            <li class="nav-item">
+              {% url 'staff_add_fees' as staff_add_fees %}
+              <a href="{{ staff_add_fees }}" class="nav-link {% if request.path == staff_add_fees %} active {% endif %}">
+                <i class="nav-icon fas fa-rupee-sign"></i>
+                <p>
+                  Add Fees
+                  {% comment %} <span class="right badge badge-danger">New</span> {% endcomment %}
+                </p>
+              </a>
+            </li>
 
             <li class="nav-item">
               {% url 'staff_apply_leave' as staff_apply_leave %}
