@@ -8,7 +8,7 @@ from django.core import serializers
 import json
 
 
-from student_management_app.models import CustomUser, Staffs, Courses, Subjects, Students, SessionYearModel, Attendance, AttendanceReport, LeaveReportStaff, FeedBackStaffs, StudentResult,StudentFees
+from student_management_app.models import CustomUser, Staffs, Courses, Subjects, Students, SessionYearModel, Attendance, AttendanceReport, LeaveReportStaff, FeedBackStaffs, StudentResult,StudentFees,ExamReportStaff
 
 
 def staff_home(request):
@@ -77,6 +77,35 @@ def staff_take_attendance(request):
         "session_years": session_years
     }
     return render(request, "staff_template/take_attendance_template.html", context)
+
+def staff_apply_exam(request):
+    staff_obj = Staffs.objects.get(admin=request.user.id)
+    leave_data = ExamReportStaff.objects.filter(staff_id=staff_obj)
+    context = {
+        "leave_data": leave_data
+    }
+    return render(request, "staff_template/staff_apply_exam_template.html", context)
+
+
+def staff_apply_exam_save(request):
+    if request.method != "POST":
+        messages.error(request, "Invalid Method")
+        return redirect('staff_apply_exam')
+    else:
+        exam_date = request.POST.get('exam_date')
+        exam_link = request.POST.get('exam_link')
+        exam_name = request.POST.get('exam_name')
+
+        staff_obj = Staffs.objects.get(admin=request.user.id)
+        try:
+            exam_report = ExamReportStaff(staff_id=staff_obj, exam_date=exam_date, exam_name=exam_name,
+                                          exam_link=exam_link, leave_status=0)
+            exam_report.save()
+            messages.success(request, "Applied for Exam.")
+            return redirect('staff_apply_exam')
+        except:
+            messages.error(request, "Failed to Apply exam")
+            return redirect('staff_apply_exam')
 
 
 def staff_apply_leave(request):
