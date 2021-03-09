@@ -58,6 +58,8 @@ urlpatterns = [
     path('admin_get_attendance_student/', HodViews.admin_get_attendance_student, name="admin_get_attendance_student"),
     path('admin_profile/', HodViews.admin_profile, name="admin_profile"),
     path('admin_profile_update/', HodViews.admin_profile_update, name="admin_profile_update"),
+    path('staff_apply_exam/', StaffViews.staff_apply_exam, name="staff_apply_exam"),
+    path('staff_apply_exam_save/', StaffViews.staff_apply_exam_save, name="staff_apply_exam_save"),
     
 
 
@@ -94,4 +96,5 @@ urlpatterns = [
     path('student_profile_update/', StudentViews.student_profile_update, name="student_profile_update"),
     path('student_view_result/', StudentViews.student_view_result, name="student_view_result"),
     path('student_view_fees/', StudentViews.student_view_fees, name="student_view_fees"),
+    path('student_exam_view/', StudentViews.student_exam_view, name="student_exam_view"),
 ]
