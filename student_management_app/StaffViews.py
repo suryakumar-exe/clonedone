@@ -427,7 +427,7 @@ def staff_add_result_save(request):
             messages.error(request, "Failed to Add Result!")
             return redirect('staff_add_result')
         
-        def staff_exam_view(request):
+def staff_exam_view(request):
     leaves = ExamReportStaff.objects.all()
     context = {
         "leaves": leaves
