@@ -426,3 +426,22 @@ def staff_add_result_save(request):
         except:
             messages.error(request, "Failed to Add Result!")
             return redirect('staff_add_result')
+        
+        def staff_exam_view(request):
+    leaves = ExamReportStaff.objects.all()
+    context = {
+        "leaves": leaves
+    }
+    return render(request, 'staff_template/staff_exam_view.html', context)
+
+
+def delete_exam(request, exam_name):
+    staff = ExamReportStaff.objects.get(exam_name=exam_name)
+    try:
+        staff.delete()
+        messages.success(request, "Exam Deleted Successfully.")
+        return redirect('staff_exam_view')
+    except:
+        messages.error(request, "Failed to Delete Exam.")
+        return redirect('staff_exam_view')
+
