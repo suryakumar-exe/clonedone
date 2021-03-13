@@ -141,6 +141,29 @@
                 </p>
               </a>
             </li>
+                
+            <li class="nav-item">
+              {% url 'admin_notification_view' as admin_notification_view %}
+              <a href="{{ admin_notification_view }}" class="nav-link {% if request.path == admin_notification_view %} active {% endif %}">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Manage Notification
+                  {% comment %} <span class="right badge badge-danger">New</span> {% endcomment %}
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              {% url 'add_notification' as add_notification %}
+              <a href="{{ add_notification }}" class="nav-link {% if request.path == add_notification %} active {% endif %}">
+                <i class="nav-icon fas fa-bell"></i>
+                <p>
+                  Add Notification
+                  {% comment %} <span class="right badge badge-danger">New</span> {% endcomment %}
+                </p>
+              </a>
+            </li>
+
 
 
             <li class="nav-item">
