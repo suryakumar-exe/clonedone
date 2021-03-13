@@ -8,7 +8,7 @@ from django.core import serializers
 import json
 
 
-from student_management_app.models import CustomUser, Staffs, Courses, Subjects, Students, SessionYearModel, Attendance, AttendanceReport, LeaveReportStaff, FeedBackStaffs, StudentResult,StudentFees,ExamReportStaff
+from student_management_app.models import CustomUser, Staffs, Courses, Subjects, Students, SessionYearModel, Attendance, AttendanceReport, LeaveReportStaff, FeedBackStaffs, StudentResult,StudentFees,ExamReportStaff,AddNotification
 
 
 def staff_home(request):
