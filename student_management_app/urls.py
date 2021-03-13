@@ -109,4 +109,6 @@ urlpatterns = [
     path('student_view_fees/', StudentViews.student_view_fees, name="student_view_fees"),
     path('student_exam_view/', StudentViews.student_exam_view, name="student_exam_view"),
     path('student_notification_view/', StudentViews.student_notification_view, name="student_notification_view"),
+    
+    path('export_excel/', views.export_excel, name="export_excel")
 ]
