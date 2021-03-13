@@ -11,7 +11,8 @@
 <section class="content">
         <div class="container-fluid">
 
-            <a class="btn btn-primary" href="{% url 'add_student' %}" role="button">+ Add Student</a> <br/>&nbsp;
+            <a class="btn btn-primary" href="{% url 'add_student' %}" role="button">+ Add Student</a>
+            <a class="btn btn-secondary" href="{% url 'export_excel' %}" role="button">Export Number</a>
             
             {% if messages %}
                                 <div class="form-group">
