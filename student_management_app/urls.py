@@ -58,6 +58,14 @@ urlpatterns = [
     path('admin_get_attendance_student/', HodViews.admin_get_attendance_student, name="admin_get_attendance_student"),
     path('admin_profile/', HodViews.admin_profile, name="admin_profile"),
     path('admin_profile_update/', HodViews.admin_profile_update, name="admin_profile_update"),
+    path('add_notification/', HodViews.add_notification, name="add_notification"),
+    path('add_notification_save/', HodViews.add_notification_save, name="add_notification_save"),
+    path('admin_notification_view/', HodViews.admin_notification_view, name="admin_notification_view"),
+    path('delete_not/<not_title>/', HodViews.delete_not, name="delete_not"),
+    
+    
+    
+    
     path('staff_apply_exam/', StaffViews.staff_apply_exam, name="staff_apply_exam"),
     path('staff_apply_exam_save/', StaffViews.staff_apply_exam_save, name="staff_apply_exam_save"),
     
@@ -85,6 +93,7 @@ urlpatterns = [
     path('staff_add_fees_save/', StaffViews.staff_add_fees_save, name="staff_add_fees_save"),
     path('staff_exam_view/', StaffViews.staff_exam_view, name="staff_exam_view"),
     path('delete_exam/<exam_name>/', StaffViews.delete_exam, name="delete_exam"),
+    path('notification_view/', StaffViews.notification_view, name="notification_view"),
 
     # URSL for Student
     path('student_home/', StudentViews.student_home, name="student_home"),
@@ -99,5 +108,5 @@ urlpatterns = [
     path('student_view_result/', StudentViews.student_view_result, name="student_view_result"),
     path('student_view_fees/', StudentViews.student_view_fees, name="student_view_fees"),
     path('student_exam_view/', StudentViews.student_exam_view, name="student_exam_view"),
-    
+    path('student_notification_view/', StudentViews.student_notification_view, name="student_notification_view"),
 ]
