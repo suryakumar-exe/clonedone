@@ -444,4 +444,11 @@ def delete_exam(request, exam_name):
     except:
         messages.error(request, "Failed to Delete Exam.")
         return redirect('staff_exam_view')
+    
+def notification_view(request):
+    leaves = AddNotification.objects.all()
+    context = {
+        "leaves": leaves
+    }
+    return render(request, 'staff_template/notification_view.html', context)
 
