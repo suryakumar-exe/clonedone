@@ -7,7 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core import serializers
 import json
 
-from student_management_app.models import CustomUser, Staffs, Courses, Subjects, Students, SessionYearModel, FeedBackStudent, FeedBackStaffs, LeaveReportStudent, LeaveReportStaff, Attendance, AttendanceReport
+from student_management_app.models import CustomUser, Staffs, Courses, Subjects, Students,AddNotification,SessionYearModel, FeedBackStudent, FeedBackStaffs, LeaveReportStudent, LeaveReportStaff, Attendance, AttendanceReport
 from .forms import AddStudentForm, EditStudentForm
 
 
