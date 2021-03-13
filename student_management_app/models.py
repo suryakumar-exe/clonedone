@@ -149,6 +149,15 @@ class FeedBackStaffs(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects = models.Manager()
 
+class AddNotification(models.Model):
+    not_date = models.CharField(max_length=255)
+    not_title = models.CharField(max_length=50, default=False)
+    not_body = models.TextField()
+    leave_status = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    objects = models.Manager()
+
 
 
 class NotificationStudent(models.Model):
