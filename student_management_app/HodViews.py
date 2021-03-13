@@ -795,5 +795,44 @@ def staff_profile(request):
 def student_profile(requtest):
     pass
 
+def add_notification(request):
+    return render(request, 'hod_template/add_notification.html')
+
+
+def add_notification_save(request):
+    if request.method != "POST":
+        messages.error(request, "Invalid Method")
+        return redirect('add_notification')
+    else:
+        not_date = request.POST.get('not_date')
+        not_title = request.POST.get('not_title')
+        not_body = request.POST.get('not_body')
+
+        exam_report = AddNotification(not_date=not_date, not_title=not_title,
+                                      not_body=not_body, leave_status=0)
+        exam_report.save()
+        messages.success(request, "Notification Posted.")
+        return redirect('add_notification')
+
+
+def admin_notification_view(request):
+    leaves = AddNotification.objects.all()
+    context = {
+        "leaves": leaves
+    }
+    return render(request, 'hod_template/admin_notification_view.html', context)
+
+
+def delete_not(request, not_title):
+    staff = AddNotification.objects.get(not_title=not_title)
+    try:
+        staff.delete()
+        messages.success(request, "Notification Deleted Successfully.")
+        return redirect('admin_notification_view')
+    except:
+        messages.error(request, "Failed to Delete Exam.")
+        return redirect('admin_notification_view')
+
+
 
 
